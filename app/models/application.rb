@@ -10,6 +10,10 @@ class Application < ActiveRecord::Base
 
   def track_deployment!
     self.deployments.create
+
+    self.notification_subscriptions.each do |subscription|
+      subscription.notifier.notify(subscription)
+    end
   end
 
   private def create_token
