@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121201243) do
+ActiveRecord::Schema.define(version: 20141121211841) do
 
   create_table "applications", force: true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141121201243) do
     t.string  "type"
     t.string  "room_id"
     t.integer "application_id"
+    t.string  "token"
   end
 
 end
