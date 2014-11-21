@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121063502) do
+ActiveRecord::Schema.define(version: 20141121201243) do
 
   create_table "applications", force: true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20141121063502) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "applications", ["token"], name: "index_applications_on_token", unique: true
 
   create_table "deployments", force: true do |t|
     t.datetime "deployed_at"

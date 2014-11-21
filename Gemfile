@@ -10,6 +10,8 @@ gem 'racksh', '~> 1.0.0'
 group :development, :test do
   gem 'sqlite3', '~> 1.3.10'
   gem 'rspec', '~> 3.1.0'
+  gem 'shotgun'
+  gem 'pry-byebug'
 end
 
 group :production do

@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 
 require 'rspec'
+require 'pry'
 require 'rack/test'
 require './app'
 
@@ -10,6 +11,10 @@ end
 
 def app
   Sinatra::Application
+end
+
+def response
+  last_response
 end
 
 def response
