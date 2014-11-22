@@ -2,9 +2,9 @@ require 'json'
 require 'httparty'
 
 class HipchatNotifier
-  def notify(notification_subscription)
-    app_name = notification_subscription.application.name
-    app_url  = notification_subscription.application.url
+  def notify(application, notification_subscription)
+    app_name = application.name
+    app_url  = application.url
     room_id  = notification_subscription.room_id
     token    = notification_subscription.token
 

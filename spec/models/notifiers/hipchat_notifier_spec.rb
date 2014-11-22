@@ -5,11 +5,12 @@ require './app/models/notification_subscription'
 require 'webmock/rspec'
 
 describe HipchatNotifier do
+  let(:application) { Application.new(name: 'myapp', url: 'http://example.org') }
   let(:subscription) do
     NotificationSubscription.new(
       room_id: '997620',
       token: 'mytoken',
-      application: Application.new(name: 'myapp', url: 'http://example.org')
+      application: application
     )
   end
 
@@ -20,7 +21,7 @@ describe HipchatNotifier do
           "https://api.hipchat.com/v2/room/#{subscription.room_id}/notification"
       ).to_return(status: 204)
 
-      HipchatNotifier.new.notify(subscription)
+      HipchatNotifier.new.notify(application, subscription)
     end
 
     it 'posts to the hipchat api v2' do

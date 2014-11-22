@@ -10,7 +10,7 @@ describe DeployNotificationJob do
     it 'calls the subscriptions notifier' do
       DeployNotificationJob.new.perform(application, subscription)
 
-      expect(subscription.notifier).to have_received(:notify).with(subscription)
+      expect(subscription.notifier).to have_received(:notify).with(application, subscription)
     end
   end
 end

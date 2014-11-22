@@ -4,6 +4,6 @@ class DeployNotificationJob
   include SuckerPunch::Job
 
   def perform(application, subscription)
-    subscription.notifier.notify(subscription)
+    subscription.notifier.notify(application, subscription)
   end
 end
