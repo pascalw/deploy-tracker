@@ -7,6 +7,8 @@ gem 'activerecord', '~> 4.1.8'
 gem 'rake', '~> 10.3.2'
 gem 'racksh', '~> 1.0.0'
 gem 'httparty', '~> 0.13.3'
+gem 'sucker_punch', '~> 1.0'
+gem 'unicorn'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.10'
@@ -18,5 +20,4 @@ end
 
 group :production do
   gem 'pg'
-  gem 'unicorn'
 end

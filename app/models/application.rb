@@ -1,6 +1,7 @@
 require 'securerandom'
 require './app/models/deployment'
 require './app/models/notification_subscription'
+require './app/jobs/deploy_notification_job'
 
 class Application < ActiveRecord::Base
   has_many :deployments
@@ -12,7 +13,7 @@ class Application < ActiveRecord::Base
     self.deployments.create
 
     self.notification_subscriptions.each do |subscription|
-      subscription.notifier.notify(subscription)
+      DeployNotificationJob.new.async.perform(self, subscription)
     end
   end
 

@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'support/active_record'
 require './app/models/application'
 require './app/models/notification_subscription'
+require './app/jobs/deploy_notification_job'
 
 describe Application do
   subject(:application) { Application.create(name: 'my app') }
@@ -30,17 +31,18 @@ describe Application do
       expect { application.track_deployment! }.to change{ application.deployments.count }.by(1)
     end
 
-    it 'calls the registered notifiers' do
-      notifier = double(notify: nil)
-
+    it 'creates DeployNotificationJobs for each subscription' do
       subscription1 = stubbed_subscription
       subscription2 = stubbed_subscription
       application.notification_subscriptions << [subscription1, subscription2]
 
+      job = double(async: double(perform: nil))
+      allow(DeployNotificationJob).to receive(:new).and_return(job)
+
       application.track_deployment!
 
-      expect(subscription1.notifier).to have_received(:notify).with(subscription1)
-      expect(subscription2.notifier).to have_received(:notify).with(subscription2)
+      expect(job.async).to have_received(:perform).with(application, subscription1)
+      expect(job.async).to have_received(:perform).with(application, subscription2)
     end
   end
 
