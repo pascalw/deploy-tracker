@@ -7,7 +7,7 @@ describe Deployment do
 
   describe '.create' do
     before do
-      Time.stub(:now) { Time.new(2014, 11, 22) }
+      allow(Time).to receive(:now).and_return(Time.new(2014, 11, 22))
     end
 
     it 'sets the deployed_at timestamp to Time.now' do
