@@ -9,10 +9,6 @@ error ActiveRecord::RecordNotFound do
 end
 
 post '/deployments/:token' do |token|
-  pass unless request.accept? 'application/json'
-
-  application = Application.find_by!(token: token)
-  application.track_deployment!
-
+  Application.find_by!(token: token).track_deployment!
   status 204
 end
